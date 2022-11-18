@@ -7,7 +7,12 @@ class CoursesProvider extends ChangeNotifier {
   List<Course> courses = [];
   List<Test> tests = [];
 
-  String currentCourseName = "";
+  String _currentCourseName = "";
+  set currentCourseName(String courseName) {
+    _currentCourseName = courseName;
+    notifyListeners();
+  }
+  String get currentCourseName => _currentCourseName;
 
   CoursesProvider() {
     loadCourses();
@@ -40,10 +45,10 @@ class CoursesProvider extends ChangeNotifier {
         ),
         Test(
           name: "Exposicion Simulaciones",
-          calification: 5.9,
+          calification: 5.9993,
         ),
     ];
-    currentCourseName = courseName;
+    _currentCourseName = courseName;
     notifyListeners();
   }
 }
