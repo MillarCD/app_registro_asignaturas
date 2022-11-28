@@ -1,14 +1,18 @@
-import 'package:asignaturas/providers/courses_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:asignaturas/providers/courses_provider.dart';
+import 'package:asignaturas/providers/modal_provider.dart';
 import 'package:asignaturas/screens/screens.dart';
+
+
 
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider<CoursesProvider>(create: (context) => CoursesProvider(),)
+      ChangeNotifierProvider<CoursesProvider>(create: (context) => CoursesProvider(),),
+      ChangeNotifierProvider<ModalProvider>(create: (context) => ModalProvider())
     ],
     child: const MyApp(),
   ));
