@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class FormProvider extends ChangeNotifier {
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState>? formKey;
   Map<String, dynamic> forms = {};
   bool _isLoading = false;
 
@@ -16,10 +16,11 @@ class FormProvider extends ChangeNotifier {
 
 
   bool isValidForm() {
-
-    print(formKey.currentState?.validate());
+    if (formKey == null) return false;
+    
+    print(formKey!.currentState?.validate());
     print('objects: $forms');
 
-    return formKey.currentState?.validate() ?? false;
+    return formKey!.currentState?.validate() ?? false;
   }
 }

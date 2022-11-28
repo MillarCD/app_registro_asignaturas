@@ -1,3 +1,4 @@
+import 'package:asignaturas/providers/form_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -12,7 +13,8 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<CoursesProvider>(create: (context) => CoursesProvider(),),
-      ChangeNotifierProvider<ModalProvider>(create: (context) => ModalProvider())
+      ChangeNotifierProvider<ModalProvider>(create: (context) => ModalProvider()),
+      ChangeNotifierProvider<FormProvider>(create: (context) => FormProvider()),
     ],
     child: const MyApp(),
   ));

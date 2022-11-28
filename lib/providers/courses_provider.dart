@@ -51,4 +51,8 @@ class CoursesProvider extends ChangeNotifier {
     _currentCourseName = courseName;
     notifyListeners();
   }
+
+  bool checkCourse(String courseName) {
+    return (courses.indexWhere((course) => course.name == courseName) != -1) ? true : false;
+  }
 }

@@ -1,8 +1,12 @@
 
 import 'dart:ui';
 
-import 'package:asignaturas/widgets/course_form.dart';
+import 'package:asignaturas/providers/form_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:asignaturas/providers/modal_provider.dart';
+import 'package:asignaturas/widgets/course_form.dart';
 
 class ModalForm extends StatelessWidget {
   const ModalForm({super.key});
@@ -77,6 +81,10 @@ class _Modal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modalProvider = Provider.of<ModalProvider>(context);
+    final formProvider = Provider.of<FormProvider>(context);
+    formProvider.formKey = GlobalKey<FormState>();
+
     return Container(
       decoration: BoxDecoration( 
         color: Colors.purple,
@@ -86,6 +94,8 @@ class _Modal extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       width: size.width * 0.85,
       child: Form(
+        key: formProvider.formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -102,12 +112,18 @@ class _Modal extends StatelessWidget {
                   child: const Text('cancelar', style: TextStyle(fontSize: 15)),
                   onPressed: () {
                     print('[MODAL FORM] cancelar');
+                    modalProvider.isVisible = false;
                   },
                 ),
                 TextButton(
                   child: const Text('guardar', style: TextStyle(fontSize: 15)),
                   onPressed: () {
-                    print('[MODAL FORM] guardar');
+                    if (!formProvider.isValidForm()) {
+                      print("[MODAL FORM] formulario invalido");
+                      return;
+                    };
+
+                    print('[MODAL FORM] guardar...');
                   },
                 ),
               ],
