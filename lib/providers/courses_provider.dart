@@ -55,4 +55,10 @@ class CoursesProvider extends ChangeNotifier {
   bool checkCourse(String courseName) {
     return (courses.indexWhere((course) => course.name == courseName) != -1) ? true : false;
   }
+
+  Future<void> addCourse(Course newCourse) async {
+    // TODO: add course to database;
+    courses.add(newCourse);
+    notifyListeners();
+  }
 }

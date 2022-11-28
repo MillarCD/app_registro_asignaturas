@@ -1,9 +1,11 @@
+import 'package:asignaturas/providers/form_provider.dart';
+import 'package:asignaturas/widgets/course_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:asignaturas/widgets/custom_card.dart';
-import 'package:asignaturas/widgets/modal_form.dart';
+import 'package:asignaturas/widgets/modal.dart';
 import 'package:asignaturas/providers/modal_provider.dart';
 import 'package:asignaturas/providers/courses_provider.dart';
 
@@ -23,6 +25,7 @@ class CoursesScreen extends StatelessWidget {
       body: Stack(
         children: [
           CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
               const SliverAppBar(
                 title: Text("Asignaturas"),
@@ -44,7 +47,9 @@ class CoursesScreen extends StatelessWidget {
             ],
           ),
 
-          if (modalProvider.isVisible) const ModalForm(),
+          if (modalProvider.isVisible) const Modal(
+            child: CourseForm(),
+          ),
 
         ]
       ),
@@ -60,8 +65,8 @@ class CoursesScreen extends StatelessWidget {
           child: const Icon(Icons.add)
         ),
         onPressed: () {
+          Provider.of<FormProvider>(context, listen: false).operation = 'add';
           print('[COURSES SCREEN] add course');
-          // TODO: desplegar ventana para crear asignatura
           modalProvider.isVisible = true;
         },
       ) : null,
