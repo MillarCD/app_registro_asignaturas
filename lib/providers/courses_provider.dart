@@ -61,4 +61,14 @@ class CoursesProvider extends ChangeNotifier {
     courses.add(newCourse);
     notifyListeners();
   }
+
+  Future<void> updateNameCourse(String oldName, String newName) async {
+    // TODO: update database
+    courses = [...courses.map((course) {
+      if(course.name != oldName) return course;
+      return  Course(id: course.id, name: newName);
+    })];
+    
+    notifyListeners();
+  }
 }

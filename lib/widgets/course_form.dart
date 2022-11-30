@@ -19,6 +19,7 @@ class CourseForm extends StatelessWidget {
     
     formProvider.formKey = GlobalKey<FormState>();
 
+
     return Form(
         key: formProvider.formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -75,17 +76,23 @@ class _BottomButtons extends StatelessWidget {
           child: const Text('Cancelar', style: TextStyle(fontSize: 15)),
         ),
         TextButton(
-          onPressed: (formProvider.isLoading) ? null : () {
+          onPressed: (formProvider.isLoading) ? null : () async {
             formProvider.isLoading = true;
             if (!formProvider.isValidForm()) {
-              print("[MODAL FORM] formulario invalido");
+              print("[COURSE FORM] formulario invalido");
               formProvider.isLoading = false;
               return;
             };
 
-            print('[MODAL FORM] guardar...');
-            
-            coursesProvider.addCourse(Course.fromMap(formProvider.forms));
+            print('[COURSE FORM]: action: ${formProvider.operation}');
+            if (formProvider.operation == 'add') {
+              print('[COURSE FORM] guardar...');
+              await coursesProvider.addCourse(Course.fromMap(formProvider.forms));
+            } else {
+              print('[COURSE FORM]: editar asignatura');
+              await coursesProvider.updateNameCourse(formProvider.forms['oldName'], formProvider.forms['name']);
+            }
+
             formProvider.isLoading = false;
             formProvider.forms.clear();
             modalProvider.isVisible = false;

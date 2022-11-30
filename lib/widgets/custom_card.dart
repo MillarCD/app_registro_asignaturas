@@ -1,10 +1,12 @@
-import 'package:asignaturas/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:asignaturas/models/test.dart';
 import 'package:asignaturas/models/course.dart';
+import 'package:asignaturas/providers/form_provider.dart';
+import 'package:asignaturas/providers/modal_provider.dart';
 import 'package:asignaturas/providers/courses_provider.dart';
+import 'package:asignaturas/utils/utils.dart';
 
 class CustomCard extends StatelessWidget {
 
@@ -131,7 +133,13 @@ class _CourseNameTile extends StatelessWidget {
         if(coursesProvider.currentCourseName==course.name) Expanded(
           flex: 1,
           child: IconButton(
-            onPressed: () => print("IconButton pressed"),
+            onPressed: () {
+              print("[CUSTOM CARD]: IconButton pressed");
+              final formProvider = Provider.of<FormProvider>(context, listen: false);
+              formProvider.operation = 'edit';
+              formProvider.forms = {'oldName': course.name};
+              Provider.of<ModalProvider>(context, listen: false).isVisible = true;
+            },
             icon: const Icon(Icons.edit))
           )
       ],
