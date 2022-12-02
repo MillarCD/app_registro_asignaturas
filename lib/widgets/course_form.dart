@@ -1,4 +1,5 @@
 import 'package:asignaturas/models/course.dart';
+import 'package:asignaturas/widgets/bottom_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -40,66 +41,24 @@ class CourseForm extends StatelessWidget {
               },
             ),
       
-            _BottomButtons(formProvider: formProvider, modalProvider: modalProvider)
+            BottomButtons(
+              formProvider: formProvider,
+              modalProvider: modalProvider,
+              successFunction: () async {
+                print('[COURSE FORM]: action: ${formProvider.operation}');
+                if (formProvider.operation == 'add') {
+                  print('[COURSE FORM] guardar...');
+                  await coursesProvider.addCourse(Course.fromMap(formProvider.forms));
+                } else {
+                  print('[COURSE FORM]: editar asignatura');
+                  await coursesProvider.updateNameCourse(formProvider.forms['oldName'], formProvider.forms['name']);
+                }
+              },
+            )
           ],
         ),
       );
     
     
-  }
-}
-
-class _BottomButtons extends StatelessWidget {
-  const _BottomButtons({
-    Key? key,
-    required this.formProvider,
-    required this.modalProvider,
-  }) : super(key: key);
-
-  final FormProvider formProvider;
-  final ModalProvider modalProvider;
-
-  @override
-  Widget build(BuildContext context) {
-
-    final coursesProvider = Provider.of<CoursesProvider>(context);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
-          onPressed: (formProvider.isLoading) ? null : () {
-            print('[MODAL FORM] cancelar');
-            modalProvider.isVisible = false;
-            formProvider.forms.clear();
-          },
-          child: const Text('Cancelar', style: TextStyle(fontSize: 15)),
-        ),
-        TextButton(
-          onPressed: (formProvider.isLoading) ? null : () async {
-            formProvider.isLoading = true;
-            if (!formProvider.isValidForm()) {
-              print("[COURSE FORM] formulario invalido");
-              formProvider.isLoading = false;
-              return;
-            };
-
-            print('[COURSE FORM]: action: ${formProvider.operation}');
-            if (formProvider.operation == 'add') {
-              print('[COURSE FORM] guardar...');
-              await coursesProvider.addCourse(Course.fromMap(formProvider.forms));
-            } else {
-              print('[COURSE FORM]: editar asignatura');
-              await coursesProvider.updateNameCourse(formProvider.forms['oldName'], formProvider.forms['name']);
-            }
-
-            formProvider.isLoading = false;
-            formProvider.forms.clear();
-            modalProvider.isVisible = false;
-          },
-          child: const Text('Guardar', style: TextStyle(fontSize: 15)),
-        ),
-      ],
-    );
   }
 }

@@ -71,4 +71,8 @@ class CoursesProvider extends ChangeNotifier {
     
     notifyListeners();
   }
+
+  bool checkTestByName(String testName) {
+    return (tests.indexWhere((test) => test.name == testName) != -1) ? true : false;
+  }
 }

@@ -7,6 +7,7 @@ class FormProvider extends ChangeNotifier {
   Map<String, dynamic> forms = {};
   bool _isLoading = false;
   String operation = 'add'; // add || edit
+  String entity = 'course'; // course || test
   
   set isLoading(bool value) {
     _isLoading = value;

@@ -1,13 +1,14 @@
-import 'package:asignaturas/providers/form_provider.dart';
-import 'package:asignaturas/widgets/course_form.dart';
+import 'package:asignaturas/widgets/test_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:asignaturas/providers/courses_provider.dart';
+import 'package:asignaturas/providers/form_provider.dart';
+import 'package:asignaturas/providers/modal_provider.dart';
+import 'package:asignaturas/widgets/course_form.dart';
 import 'package:asignaturas/widgets/custom_card.dart';
 import 'package:asignaturas/widgets/modal.dart';
-import 'package:asignaturas/providers/modal_provider.dart';
-import 'package:asignaturas/providers/courses_provider.dart';
 
 class CoursesScreen extends StatelessWidget {
 
@@ -47,8 +48,10 @@ class CoursesScreen extends StatelessWidget {
             ],
           ),
 
-          if (modalProvider.isVisible) const Modal(
-            child: CourseForm(),
+          if (modalProvider.isVisible) Modal(
+            child: (Provider.of<FormProvider>(context, listen: false).entity == 'course')
+              ? const CourseForm()
+              : const TestForm(),
           ),
 
         ]
@@ -65,7 +68,9 @@ class CoursesScreen extends StatelessWidget {
           child: const Icon(Icons.add)
         ),
         onPressed: () {
-          Provider.of<FormProvider>(context, listen: false).operation = 'add';
+          final formProvider = Provider.of<FormProvider>(context, listen: false);
+          formProvider.operation = 'add';
+          formProvider.entity = 'course';
           print('[COURSES SCREEN] add course');
           modalProvider.isVisible = true;
         },

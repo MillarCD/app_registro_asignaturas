@@ -5,11 +5,13 @@ class CustomTextField extends StatelessWidget {
 
   final String labelText;
   final String? Function(String?)? validator;
+  final TextInputType? inputType;
 
   const CustomTextField({
     Key? key,
     required this.labelText,
-    this.validator
+    this.validator,
+    this.inputType,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class CustomTextField extends StatelessWidget {
         labelText: labelText,
       ),
       validator: validator,
-      //onChanged: onChanged,
+      keyboardType: inputType,
     );
   }
 }

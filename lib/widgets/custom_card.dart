@@ -45,8 +45,12 @@ class CustomCard extends StatelessWidget {
               minWidth: double.infinity,
               child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
               onPressed: () {
-                // TODO: desplegar panel para agregar asignaturas
+                // TODO: mostrar modal para crear evaluacion
                 print("[CUSTOM_CARD]: agregar evaluacion");
+                final formProvider = Provider.of<FormProvider>(context, listen: false);
+                formProvider.operation = 'add';
+                formProvider.entity = 'test';
+                Provider.of<ModalProvider>(context, listen: false).isVisible = true;
               },
             )
     
@@ -67,7 +71,7 @@ class _TestTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String date = test.date!=null ? transformDate(test.date!) : "";
+    final String date = test.date!=null ? transformDate(test.date)! : "";
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: const EdgeInsets.only(top: 10),
@@ -137,6 +141,7 @@ class _CourseNameTile extends StatelessWidget {
               print("[CUSTOM CARD]: IconButton pressed");
               final formProvider = Provider.of<FormProvider>(context, listen: false);
               formProvider.operation = 'edit';
+              formProvider.entity = 'course';
               formProvider.forms = {'oldName': course.name};
               Provider.of<ModalProvider>(context, listen: false).isVisible = true;
             },
