@@ -1,12 +1,12 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:asignaturas/models/test.dart';
 import 'package:asignaturas/models/course.dart';
 import 'package:asignaturas/providers/form_provider.dart';
 import 'package:asignaturas/providers/modal_provider.dart';
 import 'package:asignaturas/providers/courses_provider.dart';
-import 'package:asignaturas/utils/utils.dart';
+import 'package:asignaturas/widgets/test_tile.dart';
+import 'package:asignaturas/widgets/dismissible_background.dart';
 
 class CustomCard extends StatelessWidget {
 
@@ -23,83 +23,61 @@ class CustomCard extends StatelessWidget {
     final coursesProvider = Provider.of<CoursesProvider>(context);
     final tests = coursesProvider.tests;
 
-    return Card(
-      color: Colors.amber,
-      margin: const EdgeInsets.all(10),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-         
-            _CourseNameTile(course: course, coursesProvider: coursesProvider),
-
-            if (coursesProvider.currentCourseName==course.name) ...tests.map((test) {
-              return _TestTile(test:test);
-            }),
-
-            if (coursesProvider.currentCourseName==course.name) const SizedBox(height: 10,),
+    return Dismissible(
+      key: UniqueKey(),
+      background: const DismissibleBackGround(alignment: Alignment.centerLeft,),
+      secondaryBackground: const DismissibleBackGround(alignment: Alignment.centerRight),
+      onDismissed: (direction) {
+        print('[CUSTOM CARD]: delete course');
+        coursesProvider.deleteCourse(course.name);
+      },
+      child: Card(
+        color: Colors.amber,
+        margin: const EdgeInsets.all(10),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+           
+              _CourseNameTile(course: course, coursesProvider: coursesProvider),
     
-            if (coursesProvider.currentCourseName==course.name) MaterialButton(
-              color: Colors.greenAccent,
-              height: 50,
-              minWidth: double.infinity,
-              child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
-              onPressed: () {
-                // TODO: mostrar modal para crear evaluacion
-                print("[CUSTOM_CARD]: agregar evaluacion");
-                final formProvider = Provider.of<FormProvider>(context, listen: false);
-                formProvider.operation = 'add';
-                formProvider.entity = 'test';
-                formProvider.forms['courseName'] = course.name;
-                Provider.of<ModalProvider>(context, listen: false).isVisible = true;
-              },
-            )
+              if (coursesProvider.currentCourseName==course.name) ...tests.map((test) {
+                return Column(
+                  children: [
+                    const SizedBox(height: 10,),
+                    TestTile(test:test),
+                  ],
+                );
+              }),
     
-    
-          ],
+              if (coursesProvider.currentCourseName==course.name) const SizedBox(height: 10,),
+      
+              if (coursesProvider.currentCourseName==course.name) MaterialButton(
+                color: Colors.greenAccent,
+                height: 50,
+                minWidth: double.infinity,
+                child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
+                onPressed: () {
+                  // TODO: mostrar modal para crear evaluacion
+                  print("[CUSTOM_CARD]: agregar evaluacion");
+                  final formProvider = Provider.of<FormProvider>(context, listen: false);
+                  formProvider.operation = 'add';
+                  formProvider.entity = 'test';
+                  formProvider.forms['courseName'] = course.name;
+                  Provider.of<ModalProvider>(context, listen: false).isVisible = true;
+                },
+              )
+      
+      
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class _TestTile extends StatelessWidget {
-  final Test test;
-  const _TestTile({
-    Key? key,
-    required this.test,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final String date = test.date!=null ? transformDate(test.date)! : "";
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      margin: const EdgeInsets.only(top: 10),
-      color: Colors.blue,
-      height: 70,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 5,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(test.name, style: const TextStyle(fontSize: 20)),
-                Text(date, style: const TextStyle(fontSize: 20))
-              ],
-            ),
-          ),
-          if (test.calification != null)
-            Expanded(flex: 1, child: Text(test.calification.toString().substring(0,3), style: const TextStyle(fontSize: 20)))
-        ],
-      )
-    );
-  }
-}
 
 class _CourseNameTile extends StatelessWidget {
   const _CourseNameTile({

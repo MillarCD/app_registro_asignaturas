@@ -22,9 +22,9 @@ class CoursesProvider extends ChangeNotifier {
   Future<void> loadCourses() async {
     // Carga los cursos de la base de datos y los recopila en courses
     courses = [
-      Course(name: 'Evaluacion de proyectos informaticos'),
-      Course(name: 'simulacion'),
-      Course(name: 'taller de ingenieria de software')
+      Course(id: 1, name: 'Evaluacion de proyectos informaticos'),
+      Course(id: 2, name: 'simulacion'),
+      Course(id: 3, name: 'taller de ingenieria de software')
     ];
 
   
@@ -35,15 +35,18 @@ class CoursesProvider extends ChangeNotifier {
     print("[COURSES_PROVIDER]: cargar tests: $courseName");
     tests = [
         Test(
+          id: 1,
           name: "PP1",
           calification: 7,
           date: DateTime(2022, 11, 15)
         ),
         Test(
+          id: 2,
           name: "Trabajo 2",
           date: DateTime(2022, 11, 15)
         ),
         Test(
+          id: 3,
           name: "Exposicion Simulaciones",
           calification: 5.9993,
         ),
@@ -74,6 +77,14 @@ class CoursesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteCourse(String courseName) async {
+    // TODO: borrar asignatura de la base de datos
+    courses = [
+      ...courses.where((course) => course.name != courseName)
+    ];
+    notifyListeners();
+  }
+
   bool checkTestByName(String testName) {
     return (tests.indexWhere((test) => test.name == testName) != -1) ? true : false;
   }
@@ -88,5 +99,13 @@ class CoursesProvider extends ChangeNotifier {
 
   Future<void> updateTest(Test newTest) async {
     // TODO: update database
+  }
+
+  Future<void> deleteTest(int id) async {
+    // TODO: borrar evaluacion de la base de datos
+    tests = [
+      ...tests.where((test) => test.id != id)
+    ];
+    notifyListeners();
   }
 }

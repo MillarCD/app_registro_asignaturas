@@ -26,3 +26,9 @@ poder asignarles evaluaciones, para poder gestionar las fechas y resultados de e
 Hasta el momento la app se planteo con el objetivo de poder crear y eliminar asingaturas, ademas de
 crear y eliminar evaluaciones, a medida que el desarrollo de la app vaya progresando, se puede dar
 la posibilidad de añadir nuevas funcionalidades.
+
+## Tareas por hacer
+
+ * crear y conectar base de datos sqlite
+ * crear estilo de la app
+ * modificar el appbar

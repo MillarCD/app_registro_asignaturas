@@ -25,17 +25,14 @@ class CoursesScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          CustomScrollView(
+          if (courses.isNotEmpty) CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
               const SliverAppBar(
                 title: Text("Asignaturas"),
               ),
             
-              if (courses.isEmpty) const SliverToBoxAdapter(
-                child: Text('Lista vacia.'),
-              )
-              else SliverList(
+              SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: courses.length,
                   (context, index) {
@@ -46,7 +43,8 @@ class CoursesScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ) else const NoCourseWidget(),
+       
 
           if (modalProvider.isVisible) Modal(
             child: (Provider.of<FormProvider>(context, listen: false).entity == 'course')
@@ -76,6 +74,25 @@ class CoursesScreen extends StatelessWidget {
         },
       ) : null,
 
+    );
+  }
+}
+
+class NoCourseWidget extends StatelessWidget {
+  const NoCourseWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Colors.green,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon( Icons.menu_book_sharp, size: 100),
+          Text("No hay ninguna asignatura aún"),
+        ],
+      ),
     );
   }
 }
