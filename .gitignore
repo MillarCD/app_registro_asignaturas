@@ -4,6 +4,8 @@ macos/
 web/
 windows/
 
+.env
+
 # Miscellaneous
 *.class
 *.log
