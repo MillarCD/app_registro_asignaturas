@@ -9,11 +9,13 @@ class BottomButtons extends StatelessWidget {
     required this.formProvider,
     required this.modalProvider,
     required this.successFunction,
+    this.failFunction,
   }) : super(key: key);
 
   final FormProvider formProvider;
   final ModalProvider modalProvider;
   final Future<void> Function() successFunction;
+  final void Function()? failFunction;
   
 
   @override
@@ -27,6 +29,7 @@ class BottomButtons extends StatelessWidget {
           onPressed: (formProvider.isLoading) ? null : () {
             print('[BOTTOM BUTTON] cancelar');
             modalProvider.isVisible = false;
+            if (failFunction != null) failFunction!();
             formProvider.forms.clear();
           },
           child: const Text('Cancelar', style: TextStyle(fontSize: 15)),

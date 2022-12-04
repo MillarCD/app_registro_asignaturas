@@ -1,9 +1,10 @@
-import 'package:asignaturas/providers/form_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:asignaturas/providers/form_provider.dart';
 import 'package:asignaturas/providers/courses_provider.dart';
+import 'package:asignaturas/providers/show_date_picked_provider.dart';
 import 'package:asignaturas/providers/modal_provider.dart';
 import 'package:asignaturas/screens/screens.dart';
 
@@ -15,6 +16,7 @@ void main() {
       ChangeNotifierProvider<CoursesProvider>(create: (context) => CoursesProvider(),),
       ChangeNotifierProvider<ModalProvider>(create: (context) => ModalProvider()),
       ChangeNotifierProvider<FormProvider>(create: (context) => FormProvider()),
+      ChangeNotifierProvider<ShowDatePickedProvider>(create: (context) => ShowDatePickedProvider())
     ],
     child: const MyApp(),
   ));

@@ -50,6 +50,7 @@ class CustomCard extends StatelessWidget {
                 final formProvider = Provider.of<FormProvider>(context, listen: false);
                 formProvider.operation = 'add';
                 formProvider.entity = 'test';
+                formProvider.forms['courseName'] = course.name;
                 Provider.of<ModalProvider>(context, listen: false).isVisible = true;
               },
             )

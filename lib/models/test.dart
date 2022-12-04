@@ -11,4 +11,11 @@ class Test {
     this.date,
     this.calification
   });
+
+  factory Test.fromMap(Map<String, dynamic> newTest) => Test(
+    id: newTest['id'],
+    name: newTest['name'],
+    date: newTest['date'],
+    calification: newTest['calification']
+  );
 }

@@ -58,6 +58,8 @@ class CoursesProvider extends ChangeNotifier {
 
   Future<void> addCourse(Course newCourse) async {
     // TODO: add course to database;
+
+    // TODO: añadir la id que retorna la consulta sql
     courses.add(newCourse);
     notifyListeners();
   }
@@ -74,5 +76,17 @@ class CoursesProvider extends ChangeNotifier {
 
   bool checkTestByName(String testName) {
     return (tests.indexWhere((test) => test.name == testName) != -1) ? true : false;
+  }
+
+  Future<void> addTest(String courseName, Test newTest) async {
+    // TODO: add test to database
+
+    // TODO: añadir la id que retorna la consulta sql
+    tests = [...tests, newTest];
+    notifyListeners();
+  }
+
+  Future<void> updateTest(Test newTest) async {
+    // TODO: update database
   }
 }
