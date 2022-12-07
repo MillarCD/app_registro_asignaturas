@@ -29,7 +29,7 @@ class CustomCard extends StatelessWidget {
       secondaryBackground: const DismissibleBackGround(alignment: Alignment.centerRight),
       onDismissed: (direction) {
         print('[CUSTOM CARD]: delete course');
-        coursesProvider.deleteCourse(course.name);
+        coursesProvider.deleteCourse(course.id!);
       },
       child: Card(
         color: Colors.amber,
@@ -63,7 +63,7 @@ class CustomCard extends StatelessWidget {
                   final formProvider = Provider.of<FormProvider>(context, listen: false);
                   formProvider.operation = 'add';
                   formProvider.entity = 'test';
-                  formProvider.forms['courseName'] = course.name;
+                  formProvider.forms['courseId'] = course.id;
                   Provider.of<ModalProvider>(context, listen: false).isVisible = true;
                 },
               )
@@ -106,7 +106,7 @@ class _CourseNameTile extends StatelessWidget {
             onPressed: () {
               print("toggle para mostrar/ocultar los test");
               if(coursesProvider.currentCourseName!=course.name) {
-                coursesProvider.loadTestByCourseName(course.name);
+                coursesProvider.loadTestByCourseName(course.id!, course.name);
                 return;
               }
               coursesProvider.currentCourseName = "";

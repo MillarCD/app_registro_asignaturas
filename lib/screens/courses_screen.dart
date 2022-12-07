@@ -29,7 +29,12 @@ class CoursesScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             slivers: [
               const SliverAppBar(
-                title: Text("Asignaturas"),
+                expandedHeight: 150,
+                flexibleSpace: FlexibleSpaceBar(
+                  title: Text('Asignaturas'),
+                  centerTitle: true,
+                  background: _FlexibleBackground(),
+                ),
               ),
             
               SliverList(
@@ -89,10 +94,21 @@ class NoCourseWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Icon( Icons.menu_book_sharp, size: 100),
-          Text("No hay ninguna asignatura aún"),
+          Icon( Icons.library_books_outlined, size: 100),
+          Text("No hay ninguna asignatura aún", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
         ],
       ),
+    );
+  }
+}
+
+class _FlexibleBackground extends StatelessWidget {
+  const _FlexibleBackground({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.amber,
     );
   }
 }

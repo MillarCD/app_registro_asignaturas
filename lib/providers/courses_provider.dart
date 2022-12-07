@@ -1,3 +1,4 @@
+import 'package:asignaturas/providers/db_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:asignaturas/models/test.dart';
@@ -21,37 +22,16 @@ class CoursesProvider extends ChangeNotifier {
 
   Future<void> loadCourses() async {
     // Carga los cursos de la base de datos y los recopila en courses
-    courses = [
-      Course(id: 1, name: 'Evaluacion de proyectos informaticos'),
-      Course(id: 2, name: 'simulacion'),
-      Course(id: 3, name: 'taller de ingenieria de software')
-    ];
-
+    courses = await DBProvider.db.getCourses();
   
     notifyListeners();
   }
 
-  Future<void> loadTestByCourseName(String courseName) async {
-    print("[COURSES_PROVIDER]: cargar tests: $courseName");
-    tests = [
-        Test(
-          id: 1,
-          name: "PP1",
-          calification: 7,
-          date: DateTime(2022, 11, 15)
-        ),
-        Test(
-          id: 2,
-          name: "Trabajo 2",
-          date: DateTime(2022, 11, 15)
-        ),
-        Test(
-          id: 3,
-          name: "Exposicion Simulaciones",
-          calification: 5.9993,
-        ),
-    ];
+  Future<void> loadTestByCourseName(int courseId, String courseName) async {
+    print("[COURSES_PROVIDER]: cargar tests: $courseId");
+    tests = await DBProvider.db.getTestsByCourse(courseId);
     _currentCourseName = courseName;
+    // TODO: arreglar problema de carga de tests
     notifyListeners();
   }
 
@@ -60,15 +40,15 @@ class CoursesProvider extends ChangeNotifier {
   }
 
   Future<void> addCourse(Course newCourse) async {
-    // TODO: add course to database;
+    int id = await DBProvider.db.createCourse(newCourse);
+    newCourse.id = id;
 
-    // TODO: añadir la id que retorna la consulta sql
     courses.add(newCourse);
     notifyListeners();
   }
 
   Future<void> updateNameCourse(String oldName, String newName) async {
-    // TODO: update database
+    await DBProvider.db.updateNameCourse(oldName, newName);
     courses = [...courses.map((course) {
       if(course.name != oldName) return course;
       return  Course(id: course.id, name: newName);
@@ -77,10 +57,10 @@ class CoursesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteCourse(String courseName) async {
-    // TODO: borrar asignatura de la base de datos
+  Future<void> deleteCourse(int courseId) async {
+    await DBProvider.db.deleteCourse(courseId);
     courses = [
-      ...courses.where((course) => course.name != courseName)
+      ...courses.where((course) => course.id != courseId)
     ];
     notifyListeners();
   }
@@ -89,20 +69,21 @@ class CoursesProvider extends ChangeNotifier {
     return (tests.indexWhere((test) => test.name == testName) != -1) ? true : false;
   }
 
-  Future<void> addTest(String courseName, Test newTest) async {
-    // TODO: add test to database
+  Future<void> addTest(int courseId, Test newTest) async {
+    int id = await DBProvider.db.createTest(newTest, courseId);
 
-    // TODO: añadir la id que retorna la consulta sql
+    newTest.id = id;
     tests = [...tests, newTest];
     notifyListeners();
   }
 
   Future<void> updateTest(Test newTest) async {
     // TODO: update database
+    notifyListeners();
   }
 
   Future<void> deleteTest(int id) async {
-    // TODO: borrar evaluacion de la base de datos
+    await DBProvider.db.deleteTest(id);
     tests = [
       ...tests.where((test) => test.id != id)
     ];
