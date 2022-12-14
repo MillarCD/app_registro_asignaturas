@@ -21,4 +21,14 @@ class Test {
     calification: newTest['calification'],
     courseId: newTest['courseId'],
   );
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'date': date,
+      'calification': calification,
+      'courseId': courseId
+    };
+  }
 }

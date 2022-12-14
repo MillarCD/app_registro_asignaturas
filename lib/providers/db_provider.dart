@@ -62,12 +62,11 @@ class DBProvider {
   Future<void> updateNameCourse(String oldName, String newName) async {
     final Database db = await database;
     await db.rawUpdate('''
-      UPDATE Courses SET name = "$newName" WHERE name = $oldName
+      UPDATE Courses SET name = "$newName" WHERE name = "$oldName"
     ''');
   }
   Future<void> deleteCourse(int id) async {
     final Database db = await database;
-    // TODO: borrar todos los cursos asignados a esa asignatura
     await db.rawDelete('''
       DELETE FROM Courses WHERE id = $id
     ''');
@@ -83,8 +82,17 @@ class DBProvider {
     List res = await db.rawQuery('''
       SELECT * FROM Tests WHERE course_id=$courseId
     ''');
+    List<Test> tests = [...res.map((test) {
+      return Test(
+        id: test['id'],
+        name: test['name'],
+        calification: test['calification'],
+        date: test['date']!=null ? toDateTime(test['date']) : null,
+        courseId: test['id'],
+      );
+    })];
 
-    return [...res.map((test) => Test.fromMap(test))];
+    return tests;
   }
 
   Future<int> createTest(Test newTest, int courseId) async {
@@ -95,6 +103,7 @@ class DBProvider {
     ''',[
       newTest.name, transformDate(newTest.date), newTest.calification, courseId
     ]);
+    print('[DB PROVIDER] test id: $id');
     return id;
   }
 

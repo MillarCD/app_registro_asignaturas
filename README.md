@@ -29,6 +29,6 @@ la posibilidad de añadir nuevas funcionalidades.
 
 ## Tareas por hacer
 
- * crear y conectar base de datos sqlite
+ * ~~crear y conectar base de datos sqlite~~
  * crear estilo de la app
  * modificar el appbar

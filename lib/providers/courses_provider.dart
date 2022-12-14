@@ -28,7 +28,7 @@ class CoursesProvider extends ChangeNotifier {
   }
 
   Future<void> loadTestByCourseName(int courseId, String courseName) async {
-    print("[COURSES_PROVIDER]: cargar tests: $courseId");
+    print("[COURSES_PROVIDER]: cargar tests: $courseName");
     tests = await DBProvider.db.getTestsByCourse(courseId);
     _currentCourseName = courseName;
     // TODO: arreglar problema de carga de tests
@@ -78,7 +78,14 @@ class CoursesProvider extends ChangeNotifier {
   }
 
   Future<void> updateTest(Test newTest) async {
-    // TODO: update database
+    await DBProvider.db.updateTest(newTest);
+    tests = [
+      ...tests.map((test) {
+        if (test.id != newTest.id) return test;
+
+        return newTest;
+      })
+    ];
     notifyListeners();
   }
 

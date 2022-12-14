@@ -58,7 +58,6 @@ class CustomCard extends StatelessWidget {
                 minWidth: double.infinity,
                 child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
                 onPressed: () {
-                  // TODO: mostrar modal para crear evaluacion
                   print("[CUSTOM_CARD]: agregar evaluacion");
                   final formProvider = Provider.of<FormProvider>(context, listen: false);
                   formProvider.operation = 'add';
