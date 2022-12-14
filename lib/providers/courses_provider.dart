@@ -31,7 +31,6 @@ class CoursesProvider extends ChangeNotifier {
     print("[COURSES_PROVIDER]: cargar tests: $courseName");
     tests = await DBProvider.db.getTestsByCourse(courseId);
     _currentCourseName = courseName;
-    // TODO: arreglar problema de carga de tests
     notifyListeners();
   }
 

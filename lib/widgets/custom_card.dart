@@ -32,7 +32,6 @@ class CustomCard extends StatelessWidget {
         coursesProvider.deleteCourse(course.id!);
       },
       child: Card(
-        color: Colors.amber,
         margin: const EdgeInsets.all(10),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -53,7 +52,7 @@ class CustomCard extends StatelessWidget {
               if (coursesProvider.currentCourseName==course.name) const SizedBox(height: 10,),
       
               if (coursesProvider.currentCourseName==course.name) MaterialButton(
-                color: Colors.greenAccent,
+                color: Colors.grey[300],
                 height: 50,
                 minWidth: double.infinity,
                 child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
@@ -95,7 +94,6 @@ class _CourseNameTile extends StatelessWidget {
         Expanded(
           flex: 5,
           child: MaterialButton(
-            color: Colors.red.withOpacity(0.8),
             height: 70,
             child: Text(
               course.name,

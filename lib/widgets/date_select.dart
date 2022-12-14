@@ -20,11 +20,11 @@ class _DateSelectState extends State<DateSelect> {
 
     print('[DATE DELECT] title: ${widget.title}');
 
-    return Container(
+    return SizedBox(
       height: 50,
       width: double.infinity,
-      color: Colors.indigo,
-      child: ElevatedButton(
+      child: MaterialButton(
+        color: Colors.grey[300],
         onPressed: widget.onPressed, 
         child: Text(widget.title, style: const TextStyle(fontSize: 16),),
       )

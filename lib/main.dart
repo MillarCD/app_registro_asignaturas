@@ -31,8 +31,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData.light().copyWith(
+        colorScheme: const ColorScheme.light().copyWith(
+          primary: const Color(0xff00b686),
+          secondary: const Color(0xff1de9b6), 
+          onSecondary: const Color(0xff373737),
+        ),
       ),
       initialRoute: 'courses_screen',
       routes: {

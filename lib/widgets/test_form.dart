@@ -43,6 +43,7 @@ class TestForm extends StatelessWidget {
               if (coursesProvider.checkTestByName(value)) return 'El nombre ya existe';
 
               formProvider.forms['name'] = value;
+              return null;
             },
           ),
           const SizedBox(height: 10,),
@@ -78,6 +79,7 @@ class TestForm extends StatelessWidget {
               if (nota < 1 || nota>7) return "La nota debe ser mayor a 1 y menor a 7";
 
               formProvider.forms['calification'] = nota;
+              return null;
             },
           ),
 

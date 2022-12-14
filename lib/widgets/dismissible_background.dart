@@ -10,7 +10,7 @@ class DismissibleBackGround extends StatelessWidget {
     return Container(
       alignment: alignment,
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      color: Colors.orange[700],
+      color: Colors.red[800],
       child: const Icon(Icons.delete),
      
     );

@@ -30,7 +30,6 @@ class TestTile extends StatelessWidget {
       },
       child: MaterialButton(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        color: Colors.blue,
         height: 70,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

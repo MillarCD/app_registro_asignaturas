@@ -42,7 +42,7 @@ class _ModalBackGround extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur( sigmaX: 1, sigmaY: 1 ),
         child: Container(
-          color: Colors.red.withOpacity(0.4),
+          color: Colors.black.withOpacity(0.4),
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
@@ -79,9 +79,9 @@ class _ModalForeground extends StatelessWidget {
   
     return Container(
       decoration: BoxDecoration( 
-        color: Colors.purple,
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: Colors.yellow, width: 2)
+        border: Border.all(width: 2) //color: Colors.yellow
       ),
       padding: const EdgeInsets.all(10),
       width: size.width * 0.85,

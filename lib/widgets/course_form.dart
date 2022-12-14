@@ -38,6 +38,7 @@ class CourseForm extends StatelessWidget {
                 if (coursesProvider.checkCourse(value)) return 'La asignatura ya esta registrada';
 
                 formProvider.forms['name'] = value;
+                return null;
               },
             ),
       

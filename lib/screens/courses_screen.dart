@@ -65,7 +65,7 @@ class CoursesScreen extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.pink, width: 2),
+            border: Border.all( width: 2),// color: Colors.pink,
             borderRadius: BorderRadius.circular(50),
           ),
           child: const Icon(Icons.add)
@@ -90,12 +90,12 @@ class NoCourseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.green,
+//      color: Colors.green,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon( Icons.library_books_outlined, size: 100),
-          Text("No hay ninguna asignatura aún", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+        children: [
+          Icon( Icons.library_books_outlined, size: 100, color: Colors.black.withOpacity(0.8),),
+          const Text("No hay ninguna asignatura aún", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
         ],
       ),
     );
@@ -108,7 +108,7 @@ class _FlexibleBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amber,
+     // color: Colors.amber,
     );
   }
 }
