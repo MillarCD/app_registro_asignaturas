@@ -88,14 +88,13 @@ class NoCourseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-//      color: Colors.green,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon( Icons.library_books_outlined, size: 100, color: Colors.black.withOpacity(0.8),),
-          const Text("No hay ninguna asignatura aún", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+          Icon( Icons.library_books_outlined, size: 100, color: Colors.black.withOpacity(0.5),),
+          const Text("Crea una asignatura", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
         ],
       ),
     );
@@ -108,7 +107,6 @@ class _FlexibleBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     // color: Colors.amber,
     );
   }
 }

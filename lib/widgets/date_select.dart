@@ -24,7 +24,7 @@ class _DateSelectState extends State<DateSelect> {
       height: 50,
       width: double.infinity,
       child: MaterialButton(
-        color: Colors.grey[300],
+        color: Theme.of(context).colorScheme.primary,
         onPressed: widget.onPressed, 
         child: Text(widget.title, style: const TextStyle(fontSize: 16),),
       )

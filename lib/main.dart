@@ -29,13 +29,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Gestor de Asignaturas',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
         colorScheme: const ColorScheme.light().copyWith(
-          primary: const Color(0xff00b686),
-          secondary: const Color(0xff1de9b6), 
-          onSecondary: const Color(0xff373737),
+          primary: Colors.indigo[600],
+          primaryContainer: Colors.indigo[900],
+          onPrimary: Colors.white,
+
+          secondary: Colors.yellow[300], 
+          secondaryContainer: Colors.yellow[500],
+          onSecondary: Colors.black,
+
+          background: Colors.indigo[400],
         ),
       ),
       initialRoute: 'courses_screen',

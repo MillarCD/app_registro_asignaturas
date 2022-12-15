@@ -25,33 +25,15 @@ class TestTile extends StatelessWidget {
       secondaryBackground: const DismissibleBackGround(alignment: Alignment.centerRight),
       onDismissed: (direction) {
         print("[CUSTOM CARD]: se borra la evaluacion");
-        print('[CUSTOM CARD] direction: $direction');
         Provider.of<CoursesProvider>(context, listen: false).deleteTest(test.id!);
       },
-      child: MaterialButton(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        height: 70,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 5,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(test.name, style: const TextStyle(fontSize: 20)),
-                  Text(date, style: const TextStyle(fontSize: 20))
-                ],
-              ),
-            ),
-            if (test.calification != null)
-              Expanded(flex: 1, child: Text(test.calification.toString().substring(0,3), style: const TextStyle(fontSize: 20)))
-          ],
-        ),
 
-        onPressed: () {
+      child: ListTile(
+        title: Text(test.name, style: const TextStyle(fontSize: 20)),
+        subtitle: Text(date, style: const TextStyle(fontSize: 20)),
+        trailing: test.calification!=null ? Text(test.calification.toString().substring(0,3), style: const TextStyle(fontSize: 20)) : null,
+
+        onTap: () {
           print("[TEST TILE]: editar evaluacion");
           final formProvider = Provider.of<FormProvider>(context, listen: false);
           Provider.of<ShowDatePickedProvider>(context, listen: false).datePicked = test.date;
@@ -60,10 +42,9 @@ class TestTile extends StatelessWidget {
           formProvider.entity = 'test';
           formProvider.forms = test.toMap();
 
-
           Provider.of<ModalProvider>(context, listen: false).isVisible = true;
         },
-      ),
+      )
     );
   }
 }

@@ -32,6 +32,7 @@ class CustomCard extends StatelessWidget {
         coursesProvider.deleteCourse(course.id!);
       },
       child: Card(
+        color: Theme.of(context).colorScheme.background,
         margin: const EdgeInsets.all(10),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -52,7 +53,7 @@ class CustomCard extends StatelessWidget {
               if (coursesProvider.currentCourseName==course.name) const SizedBox(height: 10,),
       
               if (coursesProvider.currentCourseName==course.name) MaterialButton(
-                color: Colors.grey[300],
+                color: Theme.of(context).colorScheme.secondary,
                 height: 50,
                 minWidth: double.infinity,
                 child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
@@ -110,9 +111,15 @@ class _CourseNameTile extends StatelessWidget {
             },
           ),
         ),
-        if(coursesProvider.currentCourseName==course.name) Expanded(
-          flex: 1,
+        if(coursesProvider.currentCourseName==course.name) Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).colorScheme.primary,
+          ),
           child: IconButton(
+            color: Theme.of(context).colorScheme.secondary,
             onPressed: () {
               print("[CUSTOM CARD]: IconButton pressed");
               final formProvider = Provider.of<FormProvider>(context, listen: false);
@@ -121,8 +128,8 @@ class _CourseNameTile extends StatelessWidget {
               formProvider.forms = {'oldName': course.name};
               Provider.of<ModalProvider>(context, listen: false).isVisible = true;
             },
-            icon: const Icon(Icons.edit))
-          )
+            icon: const Icon(Icons.edit)),
+        )
       ],
     );
   }

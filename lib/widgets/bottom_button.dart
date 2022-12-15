@@ -32,7 +32,7 @@ class BottomButtons extends StatelessWidget {
             if (failFunction != null) failFunction!();
             formProvider.forms.clear();
           },
-          child: const Text('Cancelar', style: TextStyle(fontSize: 15)),
+          child: Text('Cancelar', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.secondary)),
         ),
         TextButton(
           onPressed: (formProvider.isLoading) ? null : () async {
@@ -49,7 +49,7 @@ class BottomButtons extends StatelessWidget {
             formProvider.isLoading = false;
             modalProvider.isVisible = false;
           },
-          child: const Text('Guardar', style: TextStyle(fontSize: 15)),
+          child: Text('Guardar', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.secondary)),
         ),
       ],
     );
