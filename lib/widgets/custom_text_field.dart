@@ -21,8 +21,14 @@ class CustomTextField extends StatelessWidget {
 
     return TextFormField(
       decoration: InputDecoration(
-        border: const  OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         labelText: labelText,
+        labelStyle: TextStyle(color: Theme.of(context).colorScheme.secondaryContainer),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.secondaryContainer
+          )
+        )
       ),
       validator: validator,
       keyboardType: inputType,

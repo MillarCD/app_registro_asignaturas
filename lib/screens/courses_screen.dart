@@ -23,17 +23,18 @@ class CoursesScreen extends StatelessWidget {
     final courses = coursesProvider.courses;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Stack(
         children: [
           if (courses.isNotEmpty) CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
-              const SliverAppBar(
+              SliverAppBar(
                 expandedHeight: 150,
                 flexibleSpace: FlexibleSpaceBar(
-                  title: Text('Asignaturas'),
+                  title: Text('Asignaturas', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
                   centerTitle: true,
-                  background: _FlexibleBackground(),
+                  background: const _FlexibleBackground(),
                 ),
               ),
             
@@ -61,15 +62,7 @@ class CoursesScreen extends StatelessWidget {
       ),
 
       floatingActionButton: (!modalProvider.isVisible) ? FloatingActionButton(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            border: Border.all( width: 2),// color: Colors.pink,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: const Icon(Icons.add)
-        ),
+        child: const Icon(Icons.add),
         onPressed: () {
           final formProvider = Provider.of<FormProvider>(context, listen: false);
           formProvider.operation = 'add';

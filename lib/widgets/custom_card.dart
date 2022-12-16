@@ -32,7 +32,7 @@ class CustomCard extends StatelessWidget {
         coursesProvider.deleteCourse(course.id!);
       },
       child: Card(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.primary,
         margin: const EdgeInsets.all(10),
         child: Padding(
           padding: const EdgeInsets.all(8.0),

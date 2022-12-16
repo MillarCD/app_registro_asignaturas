@@ -7,6 +7,7 @@ import 'package:asignaturas/providers/courses_provider.dart';
 import 'package:asignaturas/providers/show_date_picked_provider.dart';
 import 'package:asignaturas/providers/modal_provider.dart';
 import 'package:asignaturas/screens/screens.dart';
+import 'package:asignaturas/theme/theme.dart';
 
 
 
@@ -31,19 +32,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gestor de Asignaturas',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        colorScheme: const ColorScheme.light().copyWith(
-          primary: Colors.indigo[600],
-          primaryContainer: Colors.indigo[900],
-          onPrimary: Colors.white,
-
-          secondary: Colors.yellow[300], 
-          secondaryContainer: Colors.yellow[500],
-          onSecondary: Colors.black,
-
-          background: Colors.indigo[400],
-        ),
-      ),
+      theme: DarkTheme.theme,
       initialRoute: 'courses_screen',
       routes: {
         'courses_screen': (_) => const CoursesScreen(),

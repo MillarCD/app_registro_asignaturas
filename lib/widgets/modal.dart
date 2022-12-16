@@ -81,7 +81,6 @@ class _ModalForeground extends StatelessWidget {
       decoration: BoxDecoration( 
         color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.circular(25),
-        border: Border.all(width: 2,) //color: Colors.yellow
       ),
       padding: const EdgeInsets.all(10),
       width: size.width * 0.85,

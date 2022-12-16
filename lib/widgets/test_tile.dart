@@ -32,6 +32,7 @@ class TestTile extends StatelessWidget {
         title: Text(test.name, style: const TextStyle(fontSize: 20)),
         subtitle: Text(date, style: const TextStyle(fontSize: 20)),
         trailing: test.calification!=null ? Text(test.calification.toString().substring(0,3), style: const TextStyle(fontSize: 20)) : null,
+        tileColor: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
 
         onTap: () {
           print("[TEST TILE]: editar evaluacion");
