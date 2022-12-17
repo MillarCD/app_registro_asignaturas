@@ -30,10 +30,13 @@ la posibilidad de añadir nuevas funcionalidades.
 ## Tareas por hacer
 
  * ~~crear y conectar base de datos sqlite~~
- * activar/desactivar modo oscuro
+ * ~~activar/desactivar modo oscuro~~
+ * añadir pantalla de carga
+ * quitar teclado al guardar un formulario
 
  ## Objetivos futuros
 
  * Poder asignarle un porcentaje a cada evaluacion
  * Calcular y almacenar el promedio de las asignaturas
  * push notification, para avisar sobre proximas evaluaciones
+ * guardar preferencias de usuarios

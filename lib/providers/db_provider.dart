@@ -103,7 +103,6 @@ class DBProvider {
     ''',[
       newTest.name, transformDate(newTest.date), newTest.calification, courseId
     ]);
-    print('[DB PROVIDER] test id: $id');
     return id;
   }
 

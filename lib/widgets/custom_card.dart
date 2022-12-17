@@ -28,7 +28,6 @@ class CustomCard extends StatelessWidget {
       background: const DismissibleBackGround(alignment: Alignment.centerLeft,),
       secondaryBackground: const DismissibleBackGround(alignment: Alignment.centerRight),
       onDismissed: (direction) {
-        print('[CUSTOM CARD]: delete course');
         coursesProvider.deleteCourse(course.id!);
       },
       child: Card(
@@ -58,7 +57,6 @@ class CustomCard extends StatelessWidget {
                 minWidth: double.infinity,
                 child: const Text("Agregar Evaluación", style: TextStyle(fontSize: 20),),
                 onPressed: () {
-                  print("[CUSTOM_CARD]: agregar evaluacion");
                   final formProvider = Provider.of<FormProvider>(context, listen: false);
                   formProvider.operation = 'add';
                   formProvider.entity = 'test';
@@ -102,7 +100,6 @@ class _CourseNameTile extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             onPressed: () {
-              print("toggle para mostrar/ocultar los test");
               if(coursesProvider.currentCourseName!=course.name) {
                 coursesProvider.loadTestByCourseName(course.id!, course.name);
                 return;
@@ -121,7 +118,6 @@ class _CourseNameTile extends StatelessWidget {
           child: IconButton(
             color: Theme.of(context).colorScheme.secondary,
             onPressed: () {
-              print("[CUSTOM CARD]: IconButton pressed");
               final formProvider = Provider.of<FormProvider>(context, listen: false);
               formProvider.operation = 'edit';
               formProvider.entity = 'course';

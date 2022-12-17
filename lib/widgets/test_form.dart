@@ -24,8 +24,6 @@ class TestForm extends StatelessWidget {
     
     formProvider.formKey = GlobalKey<FormState>();
 
-    print('[TEST FORM] hello I\'m the build method');
-
     return Form(
       key: formProvider.formKey,
       autovalidateMode: AutovalidateMode.always,
@@ -51,7 +49,6 @@ class TestForm extends StatelessWidget {
           DateSelect(
             title: transformDate(showDatePickedProvider.datePicked) ?? 'Agregar Fecha',
             onPressed: () async {
-              print('[TEST FORM]: mostrar calendario');
               final DateTime now = DateTime.now();
               showDatePickedProvider.datePicked = await showDatePicker(
                 context: context,
@@ -59,7 +56,6 @@ class TestForm extends StatelessWidget {
                 firstDate: DateTime(now.year), 
                 lastDate: DateTime(now.year, 12, 31),
               );
-              print("Date: ${showDatePickedProvider.datePicked}");
               
               formProvider.forms['date'] = showDatePickedProvider.datePicked;
             },
@@ -88,17 +84,13 @@ class TestForm extends StatelessWidget {
             modalProvider: modalProvider,
             failFunction: () => showDatePickedProvider.datePicked = null,
             successFunction: () async {
-              print('[TEST FORM] operation: ${formProvider.operation}');
-              print('[TEST FORM]: object: ${formProvider.forms}');
 
               if (formProvider.operation == 'add') {
-                print('[TEST FORM] guardar evaluacion');
                 await coursesProvider.addTest(
                   formProvider.forms['courseId'],
                   Test.fromMap(formProvider.forms)
                 );
               } else {
-                print('[TEST FORM] editar evaluacion');
                 await coursesProvider.updateTest(Test.fromMap(formProvider.forms));
               }
 

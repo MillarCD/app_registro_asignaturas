@@ -27,7 +27,6 @@ class BottomButtons extends StatelessWidget {
       children: [
         TextButton(
           onPressed: (formProvider.isLoading) ? null : () {
-            print('[BOTTOM BUTTON] cancelar');
             modalProvider.isVisible = false;
             if (failFunction != null) failFunction!();
             formProvider.forms.clear();
@@ -38,16 +37,17 @@ class BottomButtons extends StatelessWidget {
           onPressed: (formProvider.isLoading) ? null : () async {
             formProvider.isLoading = true;
             if (!formProvider.isValidForm()) {
-              print("[BOTTOM BUTTON] formulario invalido");
               formProvider.isLoading = false;
               return;
-            };
+            }
 
             await successFunction();
 
             formProvider.forms.clear();
             formProvider.isLoading = false;
             modalProvider.isVisible = false;
+
+            // TODO: quitar teclado
           },
           child: Text('Guardar', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.secondary)),
         ),

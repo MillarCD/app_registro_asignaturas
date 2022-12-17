@@ -17,7 +17,7 @@ class CoursesProvider extends ChangeNotifier {
 
   CoursesProvider() {
     loadCourses();
-    print("[COURSES_PROVIDER]: se cargaron los cursos");
+    // TODO: añadir pantalla de carda
   }
 
   Future<void> loadCourses() async {
@@ -28,7 +28,6 @@ class CoursesProvider extends ChangeNotifier {
   }
 
   Future<void> loadTestByCourseName(int courseId, String courseName) async {
-    print("[COURSES_PROVIDER]: cargar tests: $courseName");
     tests = await DBProvider.db.getTestsByCourse(courseId);
     _currentCourseName = courseName;
     notifyListeners();

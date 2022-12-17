@@ -1,3 +1,4 @@
+import 'package:asignaturas/providers/theme_provider.dart';
 import 'package:asignaturas/widgets/test_form.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class CoursesScreen extends StatelessWidget {
 
     final coursesProvider = Provider.of<CoursesProvider>(context);
     final modalProvider = Provider.of<ModalProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     final courses = coursesProvider.courses;
 
@@ -36,6 +38,21 @@ class CoursesScreen extends StatelessWidget {
                   centerTitle: true,
                   background: const _FlexibleBackground(),
                 ),
+                actions: [
+                  IconButton(
+                    icon: Icon((themeProvider.themeSelected == 'light')
+                      ? Icons.light_mode_outlined
+                      : Icons.mode_night_outlined
+                    ),
+                    onPressed: () {
+                      if (themeProvider.themeSelected == 'light') {
+                        themeProvider.themeSelected = 'dark';
+                        return;
+                      }
+                      themeProvider.themeSelected = 'light';
+                    },
+                  ),
+                ],
               ),
             
               SliverList(
@@ -67,7 +84,6 @@ class CoursesScreen extends StatelessWidget {
           final formProvider = Provider.of<FormProvider>(context, listen: false);
           formProvider.operation = 'add';
           formProvider.entity = 'course';
-          print('[COURSES SCREEN] add course');
           modalProvider.isVisible = true;
         },
       ) : null,
@@ -95,7 +111,7 @@ class NoCourseWidget extends StatelessWidget {
 }
 
 class _FlexibleBackground extends StatelessWidget {
-  const _FlexibleBackground({super.key});
+  const _FlexibleBackground();
 
   @override
   Widget build(BuildContext context) {

@@ -46,12 +46,9 @@ class CourseForm extends StatelessWidget {
               formProvider: formProvider,
               modalProvider: modalProvider,
               successFunction: () async {
-                print('[COURSE FORM]: action: ${formProvider.operation}');
                 if (formProvider.operation == 'add') {
-                  print('[COURSE FORM] guardar...');
                   await coursesProvider.addCourse(Course.fromMap(formProvider.forms));
                 } else {
-                  print('[COURSE FORM]: editar asignatura');
                   await coursesProvider.updateNameCourse(formProvider.forms['oldName'], formProvider.forms['name']);
                 }
               },

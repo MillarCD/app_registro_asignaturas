@@ -20,9 +20,6 @@ class FormProvider extends ChangeNotifier {
   bool isValidForm() {
     if (formKey == null) return false;
     
-    print(formKey!.currentState?.validate());
-    print('objects: $forms');
-
     return formKey!.currentState?.validate() ?? false;
   }
 }

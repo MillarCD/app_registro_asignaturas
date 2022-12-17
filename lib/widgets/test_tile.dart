@@ -24,7 +24,6 @@ class TestTile extends StatelessWidget {
       background: const DismissibleBackGround(alignment: Alignment.centerLeft,),
       secondaryBackground: const DismissibleBackGround(alignment: Alignment.centerRight),
       onDismissed: (direction) {
-        print("[CUSTOM CARD]: se borra la evaluacion");
         Provider.of<CoursesProvider>(context, listen: false).deleteTest(test.id!);
       },
 
@@ -35,7 +34,6 @@ class TestTile extends StatelessWidget {
         tileColor: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
 
         onTap: () {
-          print("[TEST TILE]: editar evaluacion");
           final formProvider = Provider.of<FormProvider>(context, listen: false);
           Provider.of<ShowDatePickedProvider>(context, listen: false).datePicked = test.date;
 

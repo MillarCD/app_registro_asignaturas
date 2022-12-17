@@ -18,8 +18,6 @@ class _DateSelectState extends State<DateSelect> {
   @override
   Widget build(BuildContext context) {
 
-    print('[DATE DELECT] title: ${widget.title}');
-
     return SizedBox(
       height: 50,
       width: double.infinity,
