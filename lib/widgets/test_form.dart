@@ -55,6 +55,18 @@ class TestForm extends StatelessWidget {
                 initialDate: now,
                 firstDate: DateTime(now.year), 
                 lastDate: DateTime(now.year, 12, 31),
+                builder: (context, child) {
+
+                  return Theme(
+                    data: Theme.of(context).copyWith(
+                      colorScheme: Theme.of(context).colorScheme.copyWith(
+                        primary: Theme.of(context).colorScheme.secondary,
+                        onPrimary: Theme.of(context).colorScheme.onSecondary
+                      ),
+                    ),
+                    child: child!
+                  );
+                },
               );
               
               formProvider.forms['date'] = showDatePickedProvider.datePicked;

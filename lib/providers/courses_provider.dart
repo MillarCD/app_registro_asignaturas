@@ -7,6 +7,8 @@ import 'package:asignaturas/models/course.dart';
 class CoursesProvider extends ChangeNotifier {
   List<Course> courses = [];
   List<Test> tests = [];
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   String _currentCourseName = "";
   set currentCourseName(String courseName) {
@@ -17,13 +19,15 @@ class CoursesProvider extends ChangeNotifier {
 
   CoursesProvider() {
     loadCourses();
-    // TODO: añadir pantalla de carda
   }
 
   Future<void> loadCourses() async {
+    _isLoading = true;
+    notifyListeners();
     // Carga los cursos de la base de datos y los recopila en courses
     courses = await DBProvider.db.getCourses();
   
+    _isLoading = false;
     notifyListeners();
   }
 

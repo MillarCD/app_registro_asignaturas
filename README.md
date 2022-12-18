@@ -31,8 +31,8 @@ la posibilidad de añadir nuevas funcionalidades.
 
  * ~~crear y conectar base de datos sqlite~~
  * ~~activar/desactivar modo oscuro~~
- * añadir pantalla de carga
- * quitar teclado al guardar un formulario
+ * ~~añadir pantalla de carga~~
+ * ~~quitar teclado al guardar un formulario~~
 
  ## Objetivos futuros
 

@@ -28,6 +28,7 @@ class BottomButtons extends StatelessWidget {
         TextButton(
           onPressed: (formProvider.isLoading) ? null : () {
             modalProvider.isVisible = false;
+            FocusScope.of(context).unfocus();
             if (failFunction != null) failFunction!();
             formProvider.forms.clear();
           },
@@ -36,6 +37,7 @@ class BottomButtons extends StatelessWidget {
         TextButton(
           onPressed: (formProvider.isLoading) ? null : () async {
             formProvider.isLoading = true;
+            FocusScope.of(context).unfocus();
             if (!formProvider.isValidForm()) {
               formProvider.isLoading = false;
               return;
@@ -47,7 +49,6 @@ class BottomButtons extends StatelessWidget {
             formProvider.isLoading = false;
             modalProvider.isVisible = false;
 
-            // TODO: quitar teclado
           },
           child: Text('Guardar', style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.secondary)),
         ),
