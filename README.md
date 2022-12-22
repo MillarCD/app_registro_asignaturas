@@ -27,6 +27,10 @@ Hasta el momento la app se planteo con el objetivo de poder crear y eliminar asi
 crear y eliminar evaluaciones, a medida que el desarrollo de la app vaya progresando, se puede dar
 la posibilidad de añadir nuevas funcionalidades.
 
+## Pequeño vistazo de la app
+
+![Alt text](https://res.cloudinary.com/dsvtk5vvn/image/upload/v1671749688/gestor_de_asignaturas/Dise%C3%B1o_sin_t%C3%ADtulo_uxvwhf.png "screenshot de la app")
+
 ## Tareas por hacer
 
  * ~~crear y conectar base de datos sqlite~~
